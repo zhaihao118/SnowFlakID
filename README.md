@@ -1,5 +1,16 @@
+# SnowFlakID Generator: #
+
+#### For Example:
+
 ~~~
-Human Readable
+new SFID: 	12600689748968350720
+Binary Type: 	1010111011011110101001001001000010111100001010100010010000000000
+Human Readable SFID Case: AXQ-N4J2Y-2M900
+~~~
+
+#### Human Readable ####
+
+~~~
 Map Rules:
 0 - 00000 1 - 00001 2 - 00010 3 - 00011
 4 - 00100 5 - 00101 6 - 00110 7 - 00111
@@ -11,10 +22,15 @@ M - 10100 N - 10101 O - (similar to 0, unuse)
 P - 10110 Q - 10111 R - 11000 (S - similar to 5,unuse)
 T - 11001 U - 11010 V - 11011 W - 11100
 X - 11101 Y - 11110 Z - 11111
-~~~
 
 ~~~
-SnowFlakeId规则介绍
+
+
+#### SnowFlakeId规则介绍
+
+
+~~~
+
 0     A     41    B     51    C   54  D  63
 +-----------+-----------+---------+--------+
 | timestamp |   hw id   | shardId | seq Id |
@@ -24,3 +40,11 @@ B. 10位HW ID(表示主机或者docker)，这样可以有1024个节点, HwID由M
 C. 3位分片id, 最大支持8个分片
 D. 最后10位为了解决并发冲突问题，并发请求时以此10位作累加，这样在同一个毫秒最多可以生成1024个ID。
 ~~~
+
+#### Usage:
+
+~~~
+BigInteger sfid = SnowFlakId.next();
+String humanReadableSFID = SnowFlakId.toHumanReadable(sfid);
+~~~
+
